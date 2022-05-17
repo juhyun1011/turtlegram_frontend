@@ -7,16 +7,19 @@ async function handleSignin() {
 
     const response = await fetch('http://127.0.0.1:5000/signup', {
         method: 'POST',
-        mode: 'cors',
-        cache: 'no-cache',
-        credentials: 'same-origin',
-        headers: {
-            "Content-Type": "application/json",
-        },
-        redirect: 'follow',
-        referrerPolicy: 'no-referrer',
         body: JSON.stringify(signupData)
-    })
-    return response.json();
+    }
+    )
+
+    console.log(response)
+
+    // 회원가입 성공 시 로그인 페이지로 이동
+    if (response.status == 200) {
+        alert(response['msg'])
+        window.location.replace("http://127.0.0.1:5500/login.html")
+    }
+    else {
+        alert(response['msg'])
+    }
 
 }

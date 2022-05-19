@@ -28,7 +28,7 @@ async function handleSignup() {
     }
 }
 
-
+// 로그인
 async function handleLogin() {
     console.log("handleLogin")
 
@@ -43,10 +43,12 @@ async function handleLogin() {
     }
     )
 
-    // if (response.status == 200) {
-    //     alert('')
-    //     window.location.replace(`${frontend_base_url}/index.html`);
-    // }
+    if (response.status == 200) {
+        alert('환영합니다!')
+        window.location.replace(`${frontend_base_url}/index.html`);
+    } else {
+        alert('아이디나 비밀번호가 옳지 않습니다.')
+    }
 
     console.log(response)
 
@@ -69,4 +71,44 @@ async function getName() {
 
     const username = document.getElementById("username")
     username.innerText = response_json.email
+}
+
+async function postArticle(title, content) {
+
+    const articleData = {
+        title: title,
+        content: content,
+    }
+    console.log(articleData)
+
+    const response = await fetch(`${backend_base_url}/article`, {
+        method: 'POST',
+        headers: {
+            'Authorization': localStorage.getItem("token")
+        },
+        body: JSON.stringify(articleData)
+    }
+    )
+
+    response_json = await response.json()
+    console.log(response_json)
+
+    if (response.status == 200) {
+        window.location.replace(`${frontend_base_url}/`);
+    } else {
+        alert(response.status)
+    }
+}
+
+
+async function getArticles() {
+    const response = await fetch(`${backend_base_url}/article`, {
+        method: 'GET'
+    }
+    )
+
+    response_json = await response.json()
+
+    return response_json.articles
+
 }

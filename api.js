@@ -112,3 +112,10 @@ async function getArticles() {
     return response_json.articles
 
 }
+
+// 로그아웃
+// backend와 송신을 하지 않기 때문에 async 필요 없음
+function logout() {
+    localStorage.removeItem("token")
+    window.location.replace(`${frontend_base_url}/`);
+}

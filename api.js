@@ -66,11 +66,16 @@ async function getName() {
         }
     }
     )
-    response_json = await response.json()
-    console.log(response_json)
 
-    const username = document.getElementById("username")
-    username.innerText = response_json.email
+    if (response.status == 200) {
+        response_json = await response.json()
+        console.log(response_json)
+        return response_json.email
+    }
+    else {
+        return null
+    }
+
 }
 
 async function postArticle(title, content) {

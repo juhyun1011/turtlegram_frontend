@@ -9,6 +9,7 @@ async function loadArticles() {
         const newArticle = document.createElement("li");
         newArticle.setAttribute("id", article._id)
         newArticle.innerText = article.title
+        newArticle.setAttribute("onclick", "articleDetail(this.id)")
         article_list.appendChild(newArticle)
     });
 

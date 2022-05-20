@@ -124,3 +124,21 @@ function logout() {
     localStorage.removeItem("token")
     window.location.replace(`${frontend_base_url}/`);
 }
+// 게시글 상세 페이지로 이동
+function articleDetail(article_id) {
+    console.log(article_id)
+    const url = `${frontend_base_url}/article_detail.html?id=${article_id}`
+    location.href = url
+}
+
+// 게시글 상세 fatch
+async function getArticleDetail(article_id) {
+    const response = await fetch(`${backend_base_url}/article/${article_id}`, {
+        method: 'GET'
+    }
+    )
+    response_json = await response.json()
+    console.log(response_json)
+
+    return response_json.article
+}

@@ -14,7 +14,7 @@ async function handleSignup() {
     }
     )
 
-    console.log(response)
+    // console.log(response)
 
     // 회원가입 성공 시 로그인 페이지로 이동
     if (response.status == 201) {
@@ -30,7 +30,7 @@ async function handleSignup() {
 
 // 로그인
 async function handleLogin() {
-    console.log("handleLogin")
+    // console.log("handleLogin")
 
     const loginData = {
         email: document.getElementById("floatingInput").value,
@@ -50,10 +50,10 @@ async function handleLogin() {
         alert('아이디나 비밀번호가 옳지 않습니다.')
     }
 
-    console.log(response)
+    // console.log(response)
 
     response_json = await response.json()
-    console.log(response_json)
+    // console.log(response_json)
     localStorage.setItem("token", response_json.token)
 
 }
@@ -69,7 +69,7 @@ async function getName() {
 
     if (response.status == 200) {
         response_json = await response.json()
-        console.log(response_json)
+        // console.log(response_json)
         return response_json.email
     }
     else {
@@ -96,7 +96,7 @@ async function postArticle(title, content) {
     )
 
     response_json = await response.json()
-    console.log(response_json)
+    // console.log(response_json)
 
     if (response.status == 200) {
         window.location.replace(`${frontend_base_url}/`);
@@ -126,7 +126,7 @@ function logout() {
 }
 // 게시글 상세 페이지로 이동
 function articleDetail(article_id) {
-    console.log(article_id)
+    // console.log(article_id)
     const url = `${frontend_base_url}/article_detail.html?id=${article_id}`
     location.href = url
 }
@@ -138,7 +138,32 @@ async function getArticleDetail(article_id) {
     }
     )
     response_json = await response.json()
-    console.log(response_json)
+    // console.log(response_json)
 
     return response_json.article
+}
+
+async function patchArticle(article_id, title, content) {
+
+    const articleData = {
+        "title": title,
+        "content": content
+    }
+    const response = await fetch(`${backend_base_url}/article/${article_id}`, {
+        headers: {
+            'Authorization': localStorage.getItem("token")
+        },
+        method: 'PATCH',
+        body: JSON.stringify(articleData)
+    }
+    )
+
+    if (response.status == 200) {
+        response_json = await response.json()
+        return response_json
+    } else {
+        alert(response.status)
+    }
+
+
 }

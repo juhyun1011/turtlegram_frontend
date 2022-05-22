@@ -167,3 +167,20 @@ async function patchArticle(article_id, title, content) {
 
 
 }
+
+async function deleteArticle() {
+    const response = await fetch(`${backend_base_url}/article/${article_id}`, {
+        headers: {
+            'Authorization': localStorage.getItem("token")
+        },
+        method: 'DELETE'
+
+    }
+    )
+
+    if (response.status == 200) {
+        window.location.replace(`${frontend_base_url}/`);
+    } else {
+        alert(response.status)
+    }
+}

@@ -70,7 +70,7 @@ async function getName() {
     if (response.status == 200) {
         response_json = await response.json()
         // console.log(response_json)
-        return response_json.email
+        return response_json
     }
     else {
         return null
@@ -167,7 +167,7 @@ async function patchArticle(article_id, title, content) {
 
 
 }
-
+// 게시글 삭제
 async function deleteArticle() {
     const response = await fetch(`${backend_base_url}/article/${article_id}`, {
         headers: {

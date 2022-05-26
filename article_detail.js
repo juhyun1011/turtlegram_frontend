@@ -21,6 +21,7 @@ async function loadArticle(article_id) {
 
     //댓글 보여주기
     const comment_section = document.getElementById("comment_section")
+    comment_section.innerHTML = ''  //comment_section에 있는 댓글들 비워주기
 
     for (let i = 0; i < article.comments.length; i++) {
         const new_comment = document.createElement("p")
@@ -96,6 +97,18 @@ async function removeArticle() {
     await deleteArticle(article_id)
 
 }
+
+
+async function writeComment() {
+    const comment_content = document.getElementById("comment_content")
+    const comment = await postComment(article_id, comment_content.value)
+    loadArticle(article_id)
+    comment_content.value = ''
+
+}
+
+
+
 
 
 loadArticle(article_id)

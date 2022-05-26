@@ -3,7 +3,7 @@ const urlParams = new URLSearchParams(window.location.search);
 const article_id = urlParams.get('id');
 console.log(article_id)
 
-
+// 게시글 보여주기
 async function loadArticle(article_id) {
     const article = await getArticleDetail(article_id);
 
@@ -17,6 +17,20 @@ async function loadArticle(article_id) {
     content.innerText = article.content
     user_email.innerText = article.user_email
     time.innerText = article.time
+    console.log(article.comments)
+
+    //댓글 보여주기
+    const comment_section = document.getElementById("comment_section")
+
+    for (let i = 0; i < article.comments.length; i++) {
+        const new_comment = document.createElement("p")
+        new_comment.innerText = article.comments[i].content
+        comment_section.appendChild(new_comment)
+
+    }
+
+
+
 
     const user = await getName()
     if (user.id != article.user) {

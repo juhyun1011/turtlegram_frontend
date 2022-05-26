@@ -77,7 +77,7 @@ async function getName() {
     }
 
 }
-
+// 게시글 등록하기
 async function postArticle(title, content) {
 
     const articleData = {
@@ -105,7 +105,7 @@ async function postArticle(title, content) {
     }
 }
 
-
+// 게시글 목록 보여주기
 async function getArticles() {
     const response = await fetch(`${backend_base_url}/article`, {
         method: 'GET'
@@ -143,6 +143,7 @@ async function getArticleDetail(article_id) {
     return response_json.article
 }
 
+// 게시글 수정
 async function patchArticle(article_id, title, content) {
 
     const articleData = {

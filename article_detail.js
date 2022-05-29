@@ -36,7 +36,7 @@ async function loadArticle(article_id) {
 
 
 
-
+    updateLike()
     const user = await getName()
     if (user.id != article.user) {
         const update_button = document.getElementById("update_button")
@@ -131,6 +131,18 @@ async function likeArticle() {
 }
 
 
+async function updateLike() {
+    const response = await getLike(article_id)
+    console.log(response)
+    liked = response.liked
+    if (liked) {
+        like_button.classList.toggle("fa-thumbs-down");
+    }
+
+
+
+
+}
 
 
 

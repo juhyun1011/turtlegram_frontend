@@ -120,16 +120,13 @@ async function likeArticle() {
 
     if (!liked) {
         const response = await postLike(article_id)
-        console.log(response)
+        console.log(response, "좋아요")
         liked = true
     } else {
-        console.log('좋아요 취소')
+        const response = await deleteLike(article_id)
+        console.log(response, "취소")
         liked = false
     }
-
-
-
-
 
 }
 

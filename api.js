@@ -208,12 +208,34 @@ async function postComment(article_id, comment_content) {
 
 }
 
+//좋아요
 async function postLike(article_id) {
     const response = await fetch(`${backend_base_url}/article/${article_id}/like`, {
         headers: {
             'Authorization': localStorage.getItem("token")
         },
         method: 'POST'
+
+    }
+    )
+
+    if (response.status == 200) {
+        response_json = await response.json()
+        return response_json
+    } else {
+        alert(response.status)
+    }
+
+}
+
+
+//좋아요 취소
+async function deleteLike(article_id) {
+    const response = await fetch(`${backend_base_url}/article/${article_id}/like`, {
+        headers: {
+            'Authorization': localStorage.getItem("token")
+        },
+        method: 'DELETE'
 
     }
     )

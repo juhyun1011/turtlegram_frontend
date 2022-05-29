@@ -2,6 +2,10 @@
 const urlParams = new URLSearchParams(window.location.search);
 const article_id = urlParams.get('id');
 console.log(article_id)
+// 좋아요 버튼 상태 지정
+let liked = false
+
+
 
 // 게시글 보여주기
 async function loadArticle(article_id) {
@@ -93,12 +97,14 @@ async function updateArticle() {
 
 }
 
+
+//게시글 삭제하기
 async function removeArticle() {
     await deleteArticle(article_id)
 
 }
 
-
+//댓글 달기
 async function writeComment() {
     const comment_content = document.getElementById("comment_content")
     const comment = await postComment(article_id, comment_content.value)
@@ -106,6 +112,28 @@ async function writeComment() {
     comment_content.value = ''
 
 }
+
+// 좋아요 기능
+async function likeArticle() {
+    const like_button = document.getElementById("like_button")
+    like_button.classList.toggle("fa-thumbs-down")
+
+    if (!liked) {
+        const response = await postLike(article_id)
+        console.log(response)
+        liked = true
+    } else {
+        console.log('좋아요 취소')
+        liked = false
+    }
+
+
+
+
+
+}
+
+
 
 
 
